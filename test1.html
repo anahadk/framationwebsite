@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio - Framation</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: 'Orbitron', sans-serif; color: white; background: black; overflow-x: hidden;}
+
+    /* Background video */
+    .video-background {position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden;}
+    .video-background video {width: 100%; height: 100%; object-fit: cover;}
+
+    /* Navbar */
+    nav {display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: sticky; top: 0; background: rgba(0,0,0,0.8); z-index: 10;}
+    .logo-container img {height: 80px;}
+    .nav-links {display: flex; gap: 2rem; list-style: none;}
+    .nav-links a {text-decoration: none; color: white; font-weight: bold;}
+    .nav-links a.active {color: #fff;}
+
+    /* Header */
+    .portfolio-header {min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;}
+    .header-content {background: rgba(0,0,0,0.7); padding: 3rem; border-radius: 16px; backdrop-filter: blur(10px);}
+    .header-content h1 {font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(45deg, #fff, #ccc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+
+    /* Portfolio Grid */
+    .portfolio-section {padding: 4rem 2rem; background: rgba(17, 17, 17, 0.95);}
+    .section-title {text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #fff;}
+    .portfolio-grid {display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto;}
+    .portfolio-item {background: rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden; backdrop-filter: blur(8px); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;}
+    .portfolio-item:hover {transform: translateY(-10px); box-shadow: 0 20px 40px rgba(255,255,255,0.3);}
+    .portfolio-item img {width: 100%; height: 200px; object-fit: cover;}
+    .portfolio-content {padding: 1.2rem;}
+
+    /* Modal Slideshow */
+    .modal {display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);}
+    .modal-content {position: relative; background: rgba(17, 17, 17, 0.95); margin: 2% auto; padding: 2rem; border-radius: 16px; width: 95%; max-width: 1200px; text-align: center; color: white;}
+    .slides {display: none;}
+    .slides.active {display: block;}
+    .video-container {position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin-bottom: 1rem;}
+    .video-container iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+    .close {position: absolute; top: 1rem; right: 1rem; font-size: 2rem; color: #aaa; cursor: pointer;}
+    .close:hover {color: #fff;}
+    .prev, .next {cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); padding: 1rem; font-size: 2rem; font-weight: bold; color: #fff; user-select: none;}
+    .prev {left: 10px;} .next {right: 10px;}
+
+    @media (max-width: 768px) {
+      .header-content h1 {font-size: 2.5rem;}
+      .portfolio-grid {grid-template-columns: 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background video -->
+  <div class="video-background">
+    <video autoplay loop muted>
+      <source src="img/portfoliovideo.webm" type="video/webm">
+    </video>
+  </div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo-container">
+      <a href="index.html"><img src="framationsmol.png" alt="Logo"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="contactus.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Portfolio Header -->
+  <section class="portfolio-header">
+    <div class="header-content">
+      <h1>Our Portfolio</h1>
+      <p>Showcasing innovative 3D marketing solutions and digital experiences</p>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section class="portfolio-section">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item" onclick="openModal('modal1')">
+        <img src="img/3dmockup.png" alt="">
+        <div class="portfolio-content"><h3>3D Mockups</h3></div>
+      </div>
+      <div class="portfolio-item" onclick="openModal('modal2')">
+        <img src="img/voiceoverads.png" alt="">
+        <div class="portfolio-content"><h3>Voiceover ads</h3></div>
+      </div>
+      <div class="portfolio-item" onclick="openModal('modal3')">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="">
+        <div class="portfolio-content"><h3>Augmented Reality Reels</h3></div>
+      </div>
+      <div class="portfolio-item" onclick="openModal('modal4')">
+        <img src="img/digitalmarketing.jpg" alt="">
+        <div class="portfolio-content"><h3>Digital Marketing</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reusable Modal Template (each has 3 videos like modal1) -->
+  <!-- Modal 1 -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="slides active">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/F3qze7dWbWg" allowfullscreen></iframe>
+        </div>
+        <h3>Product Mockup</h3><p>Bring your brand to life with bold and aesthetic mockups. 🎨✨
+This showcase highlights realistic product mockups perfect for:
+
+Social media content
+
+Digital marketing campaigns
+
+Branding & packaging design previews
+
+👉 Whether you're a content creator, marketer, or designer, these mockups give your product the professional edge it deserves.
+
+🔔 Subscribe for more 3D mockups & creative design assets!
+👍 Like & Share if you found this useful.</p>
+      </div>
+      <div class="slides">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/bwA81sxCjeU" allowfullscreen></iframe></div>
+        <h3>Creative Clothing Mockup</h3><p>ProjectShowcasing skewed Instagram-style clothing mockups 👕✨
+Perfect for brands, creators, and businesses who want professional 3D apparel visuals for their social media campaigns.
+
+If you're looking to elevate your Instagram feed, digital marketing, or product presentations, this style of mockup is designed to grab attention and showcase your brand in a unique way.
+
+👉 Want similar mockups for your brand?
+Contact us to create custom 3D clothing mockups tailored to your style.</p>
+      </div>
+      <div class="slides">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/ppgLVAG-Cwg" allowfullscreen></iframe></div>
+        <h3>Premium Skincare product mockup</h3><p>Experience the art of visual storytelling with Framation — a creative marketing agency crafting cinematic ad experiences for premium brands.</p>
+      </div>
+      <a class="prev" onclick="changeSlide('modal1', -1)">&#10094;</a>
+      <a class="next" onclick="changeSlide('modal1', 1)">&#10095;</a>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="slides active">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/Q14ixs48z2Y?si=NuJ961WRn4OR-PLo" allowfullscreen></iframe></div>
+        <h3>Chocolate AD</h3><p>Project description...</p>
+      </div>
+      <div class="slides">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/9No-FiEInLA" allowfullscreen></iframe></div>
+        <h3>Gadget & Kitchen AD</h3><p>Project description...</p>
+      </div>
+      <div class="slides">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/lTTajzrSkCw" allowfullscreen></iframe></div>
+        <h3> Car AD</h3><p>Project description...</p>
+      </div>
+      <a class="prev" onclick="changeSlide('modal2', -1)">&#10094;</a>
+      <a class="next" onclick="changeSlide('modal2', 1)">&#10095;</a>
+    </div>
+  </div>
+
+  <!-- Modal 3 -->
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="slides active">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/C0DPdy98e4c" allowfullscreen></iframe></div>
+        <h3>AR Reel 1</h3><p>Project description...</p>
+      </div>
+      <div class="slides">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/sBws8MSXN7A" allowfullscreen></iframe></div>
+        <h3>AR Reel 2</h3><p>Project description...</p>
+      </div>
+      <div class="slides">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/ktlTxC4QG8g" allowfullscreen></iframe></div>
+        <h3>AR Reel 3</h3><p>Project description...</p>
+      </div>
+      <a class="prev" onclick="changeSlide('modal3', -1)">&#10094;</a>
+      <a class="next" onclick="changeSlide('modal3', 1)">&#10095;</a>
+    </div>
+  </div>
+
+  <!-- Modal 4 -->
+  <div id="modal4" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="slides active">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" alt="Digital Marketing 1" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>Social Media planning </h3><p>We create detailed, platform-specific social media strategies that align with your brand goals.
+From content calendars and posting schedules to audience targeting and tone of voice — everything is structured to keep your brand consistent, engaging, and relevant.
+Goal: Build a strong, recognizable presence that drives engagement and brand loyalty.</p>
+      </div>
+      <div class="slides">
+        <img src="img/paidads.png" alt="Digital Marketing 2" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>Paid Social Ads</h3><p>Our team designs and manages high-performing paid campaigns on platforms like Meta (Facebook & Instagram), LinkedIn, and YouTube.
+We focus on precise audience targeting, creative ad design, and conversion tracking to maximize ROI.
+Goal: Generate leads, sales, and measurable growth through data-driven advertising.</p>
+      </div>
+      <div class="slides">
+        <img src="img/analytics.png" alt="Digital Marketing 3" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>Digital Research and analytics </h3><p>We analyze trends, competitors, and audience behavior to uncover key insights for your brand's growth.
+Using advanced tools, we track market shifts, keyword opportunities, and content gaps to guide your marketing strategy.
+Goal: Make every marketing decision backed by real data and clear insights.</p>
+      </div>
+      <a class="prev" onclick="changeSlide('modal4', -1)">&#10094;</a>
+      <a class="next" onclick="changeSlide('modal4', 1)">&#10095;</a>
+    </div>
+  </div>
+
+  <!-- Modal 5 -->
+  <div id="modal5" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="slides active">
+        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095" alt="Aesthetic Italian Brand" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>Color Palette Design</h3><p>We craft custom color palettes that define your brand's visual identity and emotional impact.
+Each palette is carefully designed to ensure consistency across digital and physical platforms — from social media and packaging to in-store visuals.</p>
+      </div>
+      <div class="slides">
+        <img src="https://images.unsplash.com/photo-1609081219090-a6d81d3085bf" alt="Aesthetic old money brand" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>Product & Package Pre-Visualization</h3><p>Before production begins, we help you visualize how your product or packaging will look in real life.
+Using 3D modeling and realistic renders, you can preview colors, materials, textures, and lighting to make confident design decisions.</p>
+      </div>
+      <div class="slides">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601" alt="Aesthetic Perfume Brand" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>Bricks & Mortar Store Visualization</h3><p>Bring your physical store concept to life through immersive 3D design and walkthroughs.
+We create realistic visualizations of interiors, product placements, lighting, and branding — helping you refine the space layout and customer experience before execution.</p>
+      </div>
+      <a class="prev" onclick="changeSlide('modal5', -1)">&#10094;</a>
+      <a class="next" onclick="changeSlide('modal5', 1)">&#10095;</a>
+    </div>
+  </div>
+
+  <!-- Modal 6 -->
+  <div id="modal6" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="slides active">
+        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766" alt="3D Visualization 1" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>VR Product Visualization</h3><p>Project description...</p>
+      </div>
+      <div class="slides">
+        <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9" alt="3D Visualization 2" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>VR ads</h3><p>Project description...</p>
+      </div>
+      <div class="slides">
+        <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac" alt="3D Visualization 3" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <h3>360 degree ads</h3><p>Project description...</p>
+      </div>
+      <a class="prev" onclick="changeSlide('modal6', -1)">&#10094;</a>
+      <a class="next" onclick="changeSlide('modal6', 1)">&#10095;</a>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function closeModal(modal) {
+      modal.style.display = 'none';
+      let iframes = modal.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        iframe.src = iframe.src;
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('close')) {
+        let modal = e.target.closest('.modal');
+        closeModal(modal);
+      }
+      if (e.target.classList.contains('modal')) {
+        closeModal(e.target);
+      }
+    });
+
+    function changeSlide(modalId, n) {
+      let modal = document.getElementById(modalId);
+      let slides = modal.querySelectorAll('.slides');
+      let index = Array.from(slides).findIndex(s => s.classList.contains('active'));
+      slides[index].classList.remove('active');
+      index = (index + n + slides.length) % slides.length;
+      slides[index].classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

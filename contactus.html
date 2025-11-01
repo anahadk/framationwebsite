@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Framation Contact Us</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      background: black;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 10;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-container img {
+      height: 100px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .contact-info {
+      text-align: right;
+      font-size: 0.9rem;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    .contact-section {
+      background: #111;
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: left;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 3rem;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 1rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    .form-group img {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      z-index: 2;
+      filter: none;
+      backdrop-filter: none;
+      pointer-events: none;
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: none;
+    }
+
+    .form-group:has(textarea) img {
+      top: 20px;
+      transform: none;
+    }
+
+    button {
+      background: white;
+      color: black;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: transform 0.2s;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('video1.png') center/cover no-repeat;
+      opacity: 0.05;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="framationsmol.png" alt="Logo">
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contactus.html">Contact</a></li>
+    </ul>
+    <div class="contact-info">
+      <p>📧 contact us - framationstudio@gmail.com</p>
+      <p>📞 phone or whatsapp - +91 7415556478</p>
+    </div>
+  </nav>
+
+  <!-- Get in Touch Section -->
+  <section class="contact-section">
+    <h2>Get in Touch</h2>
+    <form id="myForm" class="contact-form">
+      <div class="form-group">
+        <img src="contact.png" alt="Name">
+        <input type="text" name="name" placeholder="Your Name" required>
+      </div>
+      <div class="form-group">
+        <img src="Mail.png" alt="Email">
+        <input type="email" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-group">
+        <img src="phone.png" alt="Contact">
+        <input type="text" name="phonenumber" placeholder="Your Contact Number">
+      </div>
+      <div class="form-group">
+        <img src="message.png" alt="Message">
+        <textarea name="message" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyMBQnydNq5JrcrH-_d-Sr3OtrCdsg0zf0Ir1cRxE8Du0pSrXZPmVxTpw4GbGTHdN_a/exec";
+    const form = document.getElementById("myForm");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify({
+          name: form.name.value,
+          email: form.email.value,
+          phonenumber: form.phonenumber.value,
+          message: form.message.value
+        })
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("Submitted successfully!");
+          form.reset();
+        } else {
+          alert("Server error: " + res.status);
+        }
+      })
+      .catch(err => alert("Error: " + err.message));
+    });
+  </script>
+
+</body>
+</html>

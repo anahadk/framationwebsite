@@ -22,8 +22,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
+      position: relative;
       background: rgba(0,0,0,0.8);
       z-index: 10;
       flex-wrap: wrap;
@@ -78,12 +77,13 @@
     .portfolio-content {padding: 1.2rem;}
 
     /* Modal Slideshow */
-    .modal {display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);}
+    .modal {display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); overflow-y: auto;}
     .modal-content {position: relative; background: rgba(17, 17, 17, 0.95); margin: 2% auto; padding: 2rem; border-radius: 16px; width: 95%; max-width: 1200px; text-align: center; color: white;}
     .slides {display: none;}
     .slides.active {display: block;}
     .video-container {position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin-bottom: 1rem;}
     .video-container iframe {position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+    .slides img {width: 100%; height: auto; max-height: 70vh; object-fit: contain; border-radius: 12px; margin-bottom: 1rem;}
     .close {position: absolute; top: 1rem; right: 1rem; font-size: 2rem; color: #aaa; cursor: pointer;}
     .close:hover {color: #fff;}
     .prev, .next {cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); padding: 1rem; font-size: 2rem; font-weight: bold; color: #fff; user-select: none;}
@@ -100,7 +100,7 @@
   <!-- Background video -->
   <div class="video-background">
     <video autoplay loop muted>
-      <source src="img/portfoliovideo.webm" type="video/webm">
+      <source src="portfoliovideo.webm" type="video/webm">
     </video>
   </div>
 
@@ -137,15 +137,15 @@
     <h2 class="section-title">Content Demos</h2>
     <div class="portfolio-grid">
       <div class="portfolio-item" onclick="openModal('modal1')">
-        <img src="img/3dmockup.png" alt="">
+        <img src="3dmockup.png" alt="">
         <div class="portfolio-content"><h3>3D Mockups</h3></div>
       </div>
       <div class="portfolio-item" onclick="openModal('modal2')">
-        <img src="img/voiceoverads.png" alt="">
+        <img src="voiceoverads.png" alt="">
         <div class="portfolio-content"><h3>Brand Positioning Ads</h3></div>
       </div>
       <div class="portfolio-item" onclick="openModal('modal4')">
-        <img src="img/digitalmarketing.jpg" alt="">
+        <img src="digitalmarketing.jpg" alt="">
         <div class="portfolio-content"><h3>Digital Marketing</h3></div>
       </div>
     </div>
@@ -220,19 +220,19 @@ This is a spectacles commercial demo created by Framation, a creative marketing 
     <div class="modal-content">
       <span class="close">&times;</span>
       <div class="slides active">
-        <img src="img/socialmediaplanning.png" alt="Digital Marketing 1" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="socialmediaplanning.png" alt="Digital Marketing 1">
         <h3>Social Media planning </h3><p>We create detailed, platform-specific social media strategies that align with your brand goals.
 From content calendars and posting schedules to audience targeting and tone of voice — everything is structured to keep your brand consistent, engaging, and relevant.
 Goal: Build a strong, recognizable presence that drives engagement and brand loyalty.</p>
       </div>
       <div class="slides">
-        <img src="img/paidads.png" alt="Digital Marketing 2" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="paidads.png" alt="Digital Marketing 2">
         <h3>Paid Social Ads</h3><p>Our team designs and manages high-performing paid campaigns on platforms like Meta (Facebook & Instagram), LinkedIn, and YouTube.
 We focus on precise audience targeting, creative ad design, and conversion tracking to maximize ROI.
 Goal: Generate leads, sales, and measurable growth through data-driven advertising.</p>
       </div>
       <div class="slides">
-        <img src="img/digitalresearch.png" alt="Digital Marketing 3" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="digitalresearch.png" alt="Digital Marketing 3">
         <h3>Digital Research and analytics </h3><p>We analyze trends, competitors, and audience behavior to uncover key insights for your brand's growth.
 Using advanced tools, we track market shifts, keyword opportunities, and content gaps to guide your marketing strategy.
 Goal: Make every marketing decision backed by real data and clear insights.</p>
@@ -247,17 +247,17 @@ Goal: Make every marketing decision backed by real data and clear insights.</p>
     <div class="modal-content">
       <span class="close">&times;</span>
       <div class="slides active">
-        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095" alt="Aesthetic Italian Brand" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095" alt="Aesthetic Italian Brand">
         <h3>Color Palette Design</h3><p>We craft custom color palettes that define your brand's visual identity and emotional impact.
 Each palette is carefully designed to ensure consistency across digital and physical platforms — from social media and packaging to in-store visuals.</p>
       </div>
       <div class="slides">
-        <img src="https://images.unsplash.com/photo-1609081219090-a6d81d3085bf" alt="Aesthetic old money brand" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="https://images.unsplash.com/photo-1609081219090-a6d81d3085bf" alt="Aesthetic old money brand">
         <h3>Product & Package Pre-Visualization</h3><p>Before production begins, we help you visualize how your product or packaging will look in real life.
 Using 3D modeling and realistic renders, you can preview colors, materials, textures, and lighting to make confident design decisions.</p>
       </div>
       <div class="slides">
-        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601" alt="Aesthetic Perfume Brand" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601" alt="Aesthetic Perfume Brand">
         <h3>Bricks & Mortar Store Visualization</h3><p>Bring your physical store concept to life through immersive 3D design and walkthroughs.
 We create realistic visualizations of interiors, product placements, lighting, and branding — helping you refine the space layout and customer experience before execution.</p>
       </div>
@@ -271,15 +271,15 @@ We create realistic visualizations of interiors, product placements, lighting, a
     <div class="modal-content">
       <span class="close">&times;</span>
       <div class="slides active">
-        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766" alt="3D Visualization 1" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766" alt="3D Visualization 1">
         <h3>VR Product Visualization</h3><p>Project description...</p>
       </div>
       <div class="slides">
-        <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9" alt="3D Visualization 2" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9" alt="3D Visualization 2">
         <h3>VR ads</h3><p>Project description...</p>
       </div>
       <div class="slides">
-        <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac" alt="3D Visualization 3" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+        <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac" alt="3D Visualization 3">
         <h3>360 degree ads</h3><p>Project description...</p>
       </div>
       <a class="prev" onclick="changeSlide('modal6', -1)">&#10094;</a>

@@ -26,13 +26,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      background: rgba(0,0,0,0.8);
+      padding: 1rem 1.5rem;
+      background: rgba(0,0,0,0.85);
       z-index: 10;
       flex-wrap: wrap;
       gap: 1rem;
+      position: relative; /* Unfixed navbar */
     }
 
     .logo-container {
@@ -42,7 +41,7 @@
     }
 
     .logo-container img {
-      height: 100px;
+      height: 70px;
     }
 
     .nav-links {
@@ -97,6 +96,24 @@
       opacity: 0.05;
       z-index: -1;
     }
+
+    /* ✅ ADDED: Media query so navbar stacks vertically on small screens */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .contact-info {
+        text-align: center;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -108,6 +125,7 @@
         <img src="framationsmol.png" alt="Logo">
       </a>
     </div>
+
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -115,9 +133,10 @@
       <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="contactus.html">Contact</a></li>
     </ul>
+
     <div class="contact-info">
-      <p>📧 contact us - info.framation@gmail.com</p>
-      <p>📞 phone or whatsapp - +91 7415556478</p>
+      <p>📧 info.framation@gmail.com</p>
+      <p>📞 +91 7415556478</p>
     </div>
   </nav>
 
@@ -126,19 +145,25 @@
     <h2>Who are we?</h2>
     <p>
       We are a new-age creative studio built for the young, digital-first India.
-Our mission is simple — to help brands get seen, heard, and remembered.
+      Our mission is simple — to help brands get seen, heard, and remembered.
 
-Backed by modern technology and visually stunning content, we craft solutions that resonate with the youthful mindset — bold, fast, expressive, and always evolving. From scroll-stopping visuals to trend-aligned storytelling, we transform brands into experiences the audience genuinely connects with.
+      Backed by modern technology and visually stunning content, we craft solutions
+      that resonate with the youthful mindset — bold, fast, expressive, and always evolving.
+      From scroll-stopping visuals to trend-aligned storytelling, we transform brands into
+      experiences the audience genuinely connects with.
 
-But we’re more than just social media creatives or ad campaigns.
-We believe real growth comes from smart publicity, which is why we combine powerful advertising with strategic Digital PR — helping brands build influence, trust, and long-term recognition.
+      But we’re more than just social media creatives or ad campaigns. We believe
+      real growth comes from smart publicity, which is why we combine powerful
+      advertising with strategic Digital PR — helping brands build influence,
+      trust, and long-term recognition.
 
-Whether you’re an emerging startup or an expanding business, our approach ensures your brand stays relevant, culturally in sync, and visibly ahead of the curve.
+      Whether you’re an emerging startup or an expanding business, our approach ensures
+      your brand stays relevant, culturally in sync, and visibly ahead of the curve.
 
-We don’t just market your brand —
-we shape how the world sees it.
+      We don’t just market your brand — we shape how the world sees it.
     </p>
   </section>
 
 </body>
 </html>
+
